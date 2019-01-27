@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Kuynote</string>
+    <string name="nueva_nota">Nueva nota</string>
+    <string name="settings">Configuracion</string>
+    <string name="search">Buscar</string>
+    <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior
+    </string>
+</resources>
