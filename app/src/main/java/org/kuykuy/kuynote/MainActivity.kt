@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.view.Menu
 import android.widget.ListView
+import kotlinx.android.synthetic.main.activity_main.*
 import org.kuykuy.kuynote.domain.*
 import org.kuykuy.kuynote.service.NoteService
 
@@ -14,12 +15,12 @@ class MainActivity : AppCompatActivity() {
 
 
     private var listNotes = ArrayList<Note>()
-    private val noteService:NoteService = NoteService()
+    private val noteService:NoteService = NoteService(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar)
         initialize()
     }
 

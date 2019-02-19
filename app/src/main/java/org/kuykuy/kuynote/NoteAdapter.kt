@@ -17,16 +17,18 @@ import org.kuykuy.kuynote.domain.EDIT_MODE
 import org.kuykuy.kuynote.domain.MODE_EXTRA
 import org.kuykuy.kuynote.domain.NOTE_ID
 import org.kuykuy.kuynote.domain.Note
+import org.kuykuy.kuynote.repository.dao.DbManager
+import org.kuykuy.kuynote.repository.dao.KuyNoteDbHelper
+import org.kuykuy.kuynote.service.NoteService
 
-class NoteAdapter: BaseAdapter {
+class NoteAdapter(context: Context, listNotes: ArrayList<Note>) : BaseAdapter() {
 
-    var listNoteArray = ArrayList<Note>()
-    var context:Context?=null
-    var layoutInflater:LayoutInflater?=null
+    var listNoteArray = listNotes
+    var context:Context?= context
+    private val noteService:NoteService = NoteService(context)
+    private var layoutInflater:LayoutInflater?=null
 
-    constructor(context: Context, listNotes: ArrayList<Note>):super(){
-        this.context = context
-        this.listNoteArray = listNotes
+    init {
         layoutInflater = LayoutInflater.from(this.context)
     }
 
@@ -55,7 +57,7 @@ class NoteAdapter: BaseAdapter {
         }
 
         deleteBtn.setOnClickListener {
-            listNoteArray.remove(note)
+            noteService.delete(note)
             notifyDataSetChanged()
         }
 

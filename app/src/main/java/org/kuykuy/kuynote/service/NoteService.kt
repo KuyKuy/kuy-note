@@ -19,5 +19,9 @@ class NoteService (context: Context)  {
         noteRepository.save(note)
     }
 
+    fun delete(note: Note?){
+        noteRepository.delete(note)
+    }
+
 
 }
