@@ -16,7 +16,7 @@ class NoteDetailsActivity : AppCompatActivity() {
 
     private var mode:String? = ""
     private var note:Note? = Note()
-    private val noteService: NoteService = NoteService()
+    private val noteService: NoteService = NoteService(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

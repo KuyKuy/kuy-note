@@ -1,8 +1,13 @@
 package org.kuykuy.kuynote.repository
 
+import android.content.Context
 import org.kuykuy.kuynote.domain.Note
+import org.kuykuy.kuynote.repository.dao.KuyNoteDbHelper
+import org.kuykuy.kuynote.repository.dao.NoteDao
 
-class NoteRepository {
+class NoteRepository (context : Context){
+    private val kuyNoteDbHelper = KuyNoteDbHelper(context)
+    private val noteDAO = NoteDao(kuyNoteDbHelper)
     private val notes = ArrayList<Note>()
 
     init {
