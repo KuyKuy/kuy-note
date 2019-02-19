@@ -15,7 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import org.kuykuy.kuynote.domain.EDIT_MODE
 import org.kuykuy.kuynote.domain.MODE_EXTRA
-import org.kuykuy.kuynote.domain.NOTE_INDEX
+import org.kuykuy.kuynote.domain.NOTE_ID
 import org.kuykuy.kuynote.domain.Note
 
 class NoteAdapter: BaseAdapter {
@@ -48,9 +48,9 @@ class NoteAdapter: BaseAdapter {
         descTv.text = description
 
         editBtn.setOnClickListener {
-            val intent = Intent(context, NoteDetails::class.java)
+            val intent = Intent(context, NoteDetailsActivity::class.java)
             intent.putExtra(MODE_EXTRA, EDIT_MODE)
-            intent.putExtra(NOTE_INDEX, position)
+            intent.putExtra(NOTE_ID, note.id)
             context?.startActivity(intent)
         }
 

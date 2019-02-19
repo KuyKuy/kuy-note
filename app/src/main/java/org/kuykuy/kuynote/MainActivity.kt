@@ -6,27 +6,25 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.view.Menu
 import android.widget.ListView
-import kotlinx.android.synthetic.main.activity_main.*
 import org.kuykuy.kuynote.domain.*
-import org.kuykuy.kuynote.repository.db.NoteRepository
+import org.kuykuy.kuynote.service.NoteService
 
 class MainActivity : AppCompatActivity() {
 
 
 
     private var listNotes = ArrayList<Note>()
-    private val noteRepository:NoteRepository = NoteRepository()
+    private val noteService:NoteService = NoteService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
         initialize()
     }
 
     private fun initialize(){
-        noteRepository.mockData()
-        listNotes = noteRepository.findAll()
+        listNotes = noteService.findAll()
         val noteAdapter = NoteAdapter(this, listNotes)
 
         val noteListView = findViewById<ListView>(R.id.notesLv)
@@ -34,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener { view ->
-            val intent = Intent(this, NoteDetails::class.java)
+            val intent = Intent(this, NoteDetailsActivity::class.java)
             intent.putExtra(MODE_EXTRA, ADD_MODE)
             startActivity(intent)
         }
