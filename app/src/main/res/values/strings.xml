@@ -5,4 +5,8 @@
     <string name="search">Buscar</string>
     <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior
     </string>
+    <string name="save">Guardar</string>
+    <string name="note_title">Título</string>
+    <string name="note_description">Descripción</string>
+    <string name="add">Agregar</string>
 </resources>

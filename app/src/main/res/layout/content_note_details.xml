@@ -35,23 +35,25 @@
                     <EditText
                             android:id="@+id/titleEt"
                             android:background="@null"
-                            android:hint="Título"
+                            android:hint="@string/note_title"
                             android:singleLine="true"
                             android:padding="10dp"
                             android:textStyle="bold"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:inputType="text"/>
 
                     <EditText
                             android:id="@+id/descEt"
                             android:background="@null"
                             android:gravity="top"
-                            android:hint="Descripción"
+                            android:hint="@string/note_description"
                             android:minHeight="100dp"
                             android:padding="10dp"
                             android:textStyle="bold"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"/>
 
                 </LinearLayout>
 
@@ -59,12 +61,11 @@
             <Button
                     android:id="@+id/addNoteBtn"
                     style="@style/Base.Widget.AppCompat.Button.Colored"
-                    android:text="Agregar"
+                    android:text="@string/add"
                     android:layout_gravity="end"
                     android:layout_marginEnd="5dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_height="wrap_content"/>
 
         </LinearLayout>
     </ScrollView>

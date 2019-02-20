@@ -32,10 +32,10 @@ class DbManager(private val dbHelper: KuyNoteDbHelper) {
         return db?.delete(Notes.NoteEntry.TABLE_NAME, selection, selectionArgs)
     }
 
-    fun update(id:String, values:ContentValues) : Int?{
+    fun update(id:Long?, values:ContentValues) : Int?{
         val db = dbHelper.writableDatabase
         val selection = "${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf(id)
+        val selectionArgs = arrayOf("$id")
         return db?.update(Notes.NoteEntry.TABLE_NAME, values, selection, selectionArgs)
     }
 

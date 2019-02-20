@@ -37,20 +37,22 @@ class NoteRepository (context : Context){
 
     fun save(note: Note?) {
         val noteFounded = findById(note?.id)
+        val values = ContentValues().apply {
+            put(COLUMN_TITLE, note?.title)
+            put(COLUMN_DESCRIPTION, note?.description)
+        }
         if(noteFounded != null){
-            noteFounded.title = note?.title
-            noteFounded.description = note?.description
+            dbManager.update(note?.id, values)
+            dbManager.close()
         }
         else{
-            val values = ContentValues().apply {
-                put(COLUMN_TITLE, note?.title)
-                put(COLUMN_DESCRIPTION, note?.description)
-            }
             dbManager.insert(values)
+            dbManager.close()
         }
     }
 
     fun delete(note: Note?){
         dbManager.delete(note)
+        dbManager.close()
     }
 }
