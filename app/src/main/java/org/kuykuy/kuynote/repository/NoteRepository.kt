@@ -43,12 +43,11 @@ class NoteRepository (context : Context){
         }
         if(noteFounded != null){
             dbManager.update(note?.id, values)
-            dbManager.close()
         }
         else{
             dbManager.insert(values)
-            dbManager.close()
         }
+        dbManager.close()
     }
 
     fun delete(note: Note?){
