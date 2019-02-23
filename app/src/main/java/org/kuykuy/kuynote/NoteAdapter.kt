@@ -79,7 +79,7 @@ class NoteAdapter(context: Context, listNotes: ArrayList<Note>) : BaseAdapter() 
         return noteItem
     }
 
-    override fun getItem(position: Int): Any {
+    override fun getItem(position: Int): Note? {
         return listNoteArray[position]
     }
 

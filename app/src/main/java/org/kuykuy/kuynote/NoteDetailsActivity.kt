@@ -3,6 +3,7 @@ package org.kuykuy.kuynote
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_note_details.*
 import kotlinx.android.synthetic.main.content_note_details.*
 import org.kuykuy.kuynote.domain.*
@@ -29,19 +30,20 @@ class NoteDetailsActivity : AppCompatActivity() {
             titleEt.setText(note?.title)
             descEt.setText(note?.description)
             addNoteBtn.text = getString(R.string.save)
-            addNoteBtn.setOnClickListener {
-                noteService.save(note)
-                backToMain()
-            }
-
         }
-        else{
-            addNoteBtn.setOnClickListener {
-                note?.title = titleEt.text.toString()
-                note?.description = descEt.text.toString()
-                noteService.save(note)
-                backToMain()
-            }
+        addNoteBtn.setOnClickListener {
+            saveNote()
+        }
+    }
+
+    private fun saveNote() {
+        if (!titleEt.text.isEmpty() && !descEt.text.isEmpty()) {
+            note?.title = titleEt.text.toString()
+            note?.description = descEt.text.toString()
+            noteService.save(note)
+            backToMain()
+        } else {
+            Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show()
         }
     }
 

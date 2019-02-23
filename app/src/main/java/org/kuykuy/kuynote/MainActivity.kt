@@ -12,8 +12,6 @@ import org.kuykuy.kuynote.service.NoteService
 
 class MainActivity : AppCompatActivity() {
 
-
-
     private var listNotes = ArrayList<Note>()
     private val noteService:NoteService = NoteService(this)
 

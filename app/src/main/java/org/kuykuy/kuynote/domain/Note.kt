@@ -7,6 +7,7 @@ class Note {
     var description:String? = null
 
     constructor(id: Long?, title: String?, description: String?) {
+        this.id = id
         this.title = title
         this.description = description
     }
