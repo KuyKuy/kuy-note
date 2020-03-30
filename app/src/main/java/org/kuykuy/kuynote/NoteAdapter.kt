@@ -6,6 +6,7 @@ import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -18,10 +19,9 @@ import org.kuykuy.kuynote.repository.dao.DbManager
 import org.kuykuy.kuynote.repository.dao.KuyNoteDbHelper
 import org.kuykuy.kuynote.service.NoteService
 
-class NoteAdapter(context: Context, listNotes: ArrayList<Note>) : BaseAdapter() {
+class NoteAdapter(private val context: Context, private val activity: AppCompatActivity, listNotes: ArrayList<Note>) : BaseAdapter() {
 
-    private var listNoteArray = listNotes
-    private var context:Context?= context
+    private val listNoteArray = listNotes
     private val noteService:NoteService = NoteService(context)
     private var layoutInflater:LayoutInflater?=null
 
@@ -53,7 +53,8 @@ class NoteAdapter(context: Context, listNotes: ArrayList<Note>) : BaseAdapter() 
             intent.putExtra(NOTE_ID, note.id)
             intent.putExtra(NOTE_TITLE, title)
             intent.putExtra(NOTE_DESCRIPTION, description)
-            context?.startActivity(intent)
+            context.startActivity(intent)
+            activity.finish()
         }
 
         deleteBtn.setOnClickListener {
@@ -73,7 +74,7 @@ class NoteAdapter(context: Context, listNotes: ArrayList<Note>) : BaseAdapter() 
             shareIntent.action = Intent.ACTION_SEND
             shareIntent.type = MIMETYPE_TEXT_PLAIN
             shareIntent.putExtra(Intent.EXTRA_TEXT, noteText)
-            context?.startActivity(shareIntent)
+            context.startActivity(shareIntent)
         }
 
         return noteItem
