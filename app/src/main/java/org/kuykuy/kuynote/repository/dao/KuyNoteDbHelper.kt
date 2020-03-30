@@ -10,7 +10,7 @@ class KuyNoteDbHelper (context:Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
     companion object {
         const val DATABASE_VERSION = 1
-        const val DATABASE_NAME = "kyu-notes.db"
+        const val DATABASE_NAME = "kuy-notes.db"
     }
 
     override fun onCreate(db: SQLiteDatabase) {

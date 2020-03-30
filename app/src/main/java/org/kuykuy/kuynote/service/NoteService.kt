@@ -7,19 +7,19 @@ import org.kuykuy.kuynote.repository.NoteRepository
 class NoteService (context: Context)  {
     private val noteRepository = NoteRepository(context)
 
-    fun findById(id:Long?): Note? {
-        return noteRepository.findById(id)
-    }
-
     fun findAll():ArrayList<Note>{
         return noteRepository.findAll()
     }
 
-    fun save(note: Note?) {
-        noteRepository.save(note)
+    fun insert(note: Note) {
+        noteRepository.add(note)
     }
 
-    fun delete(note: Note?){
+    fun update(note: Note) {
+        noteRepository.update(note)
+    }
+
+    fun delete(note: Note){
         noteRepository.delete(note)
     }
 

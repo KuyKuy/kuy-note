@@ -10,21 +10,22 @@ import org.kuykuy.kuynote.repository.dao.Notes.NoteEntry.TABLE_NAME
 
 class DbManager(private val dbHelper: KuyNoteDbHelper) {
 
+    fun findAll() : ArrayList<Note>{
+        val db = dbHelper.readableDatabase
+        val cursor = db?.query(TABLE_NAME, null, null, null, null, null, null)
+        return toNoteArray(cursor)
+    }
+
     fun insert(values: ContentValues) : Long?{
         val db = dbHelper.writableDatabase
         return db?.insert(TABLE_NAME, null, values)
     }
 
-    fun findAll(projection:Array<String>, selection:String, selectionArgs:Array<String>) : ArrayList<Note>{
-        val db = dbHelper.readableDatabase
-        val cursor = db?.query(TABLE_NAME, projection, selection, selectionArgs, null, null, null)
-        return toNoteArray(cursor)
-    }
-
-    fun findAll() : ArrayList<Note>{
-        val db = dbHelper.readableDatabase
-        val cursor = db?.query(TABLE_NAME, null, null, null, null, null, null)
-        return toNoteArray(cursor)
+    fun update(id:Long?, values:ContentValues) : Int?{
+        val db = dbHelper.writableDatabase
+        val selection = "${BaseColumns._ID} = ?"
+        val selectionArgs = arrayOf("$id")
+        return db?.update(TABLE_NAME, values, selection, selectionArgs)
     }
 
     fun delete(note:Note?) : Int?{
@@ -33,13 +34,6 @@ class DbManager(private val dbHelper: KuyNoteDbHelper) {
         val selection = "${BaseColumns._ID} = ?"
         val selectionArgs = arrayOf("$id")
         return db?.delete(TABLE_NAME, selection, selectionArgs)
-    }
-
-    fun update(id:Long?, values:ContentValues) : Int?{
-        val db = dbHelper.writableDatabase
-        val selection = "${BaseColumns._ID} = ?"
-        val selectionArgs = arrayOf("$id")
-        return db?.update(TABLE_NAME, values, selection, selectionArgs)
     }
 
     fun close(){

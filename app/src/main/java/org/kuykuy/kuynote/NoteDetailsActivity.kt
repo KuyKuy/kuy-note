@@ -11,8 +11,6 @@ import org.kuykuy.kuynote.service.NoteService
 
 class NoteDetailsActivity : AppCompatActivity() {
 
-    private var mode:String? = ""
-    private var note:Note? = Note()
     private val noteService: NoteService = NoteService(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,29 +21,37 @@ class NoteDetailsActivity : AppCompatActivity() {
     }
 
     private fun initialize() {
-        mode = intent.getStringExtra(MODE_EXTRA)
+        val note = Note()
+        val mode = intent.getStringExtra(MODE_EXTRA)
         if(mode == EDIT_MODE) {
-            val id = intent.getLongExtra(NOTE_ID, -1)
-            note = noteService.findById(id)
-            titleEt.setText(note?.title)
-            descEt.setText(note?.description)
+            note.id = intent.getLongExtra(NOTE_ID, -1)
+            note.title = intent.getStringExtra(NOTE_TITLE)
+            note.description = intent.getStringExtra(NOTE_DESCRIPTION)
+            titleEt.setText(note.title)
+            descEt.setText(note.description)
             addNoteBtn.text = getString(R.string.save)
         }
         addNoteBtn.setOnClickListener {
-            saveNote()
+            saveNote(mode, note)
         }
     }
 
-    private fun saveNote() {
-        if (!titleEt.text.isEmpty() && !descEt.text.isEmpty()) {
-            note?.title = titleEt.text.toString()
-            note?.description = descEt.text.toString()
-            noteService.save(note)
+    private fun saveNote(mode: String, note: Note) {
+        if (validateFields()) {
+            note.title = titleEt.text.toString()
+            note.description = descEt.text.toString()
+            if(mode == ADD_MODE) {
+                noteService.insert(note)
+            } else {
+                noteService.update(note)
+            }
             backToMain()
         } else {
             Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_LONG).show()
         }
     }
+
+    private fun validateFields() = titleEt.text.isNotEmpty() && descEt.text.isNotEmpty()
 
     private fun backToMain() {
         val intent = Intent(this, MainActivity::class.java)

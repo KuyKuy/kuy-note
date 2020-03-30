@@ -13,18 +13,15 @@ import android.view.LayoutInflater
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import org.kuykuy.kuynote.domain.EDIT_MODE
-import org.kuykuy.kuynote.domain.MODE_EXTRA
-import org.kuykuy.kuynote.domain.NOTE_ID
-import org.kuykuy.kuynote.domain.Note
+import org.kuykuy.kuynote.domain.*
 import org.kuykuy.kuynote.repository.dao.DbManager
 import org.kuykuy.kuynote.repository.dao.KuyNoteDbHelper
 import org.kuykuy.kuynote.service.NoteService
 
 class NoteAdapter(context: Context, listNotes: ArrayList<Note>) : BaseAdapter() {
 
-    var listNoteArray = listNotes
-    var context:Context?= context
+    private var listNoteArray = listNotes
+    private var context:Context?= context
     private val noteService:NoteService = NoteService(context)
     private var layoutInflater:LayoutInflater?=null
 
@@ -34,6 +31,7 @@ class NoteAdapter(context: Context, listNotes: ArrayList<Note>) : BaseAdapter() 
 
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        // TODO: try to avoid the null, what if i pass the parant as root
         val noteItem =  layoutInflater?.inflate(R.layout.item_note, null)
         val note = listNoteArray[position]
         val title = note.title
@@ -53,6 +51,8 @@ class NoteAdapter(context: Context, listNotes: ArrayList<Note>) : BaseAdapter() 
             val intent = Intent(context, NoteDetailsActivity::class.java)
             intent.putExtra(MODE_EXTRA, EDIT_MODE)
             intent.putExtra(NOTE_ID, note.id)
+            intent.putExtra(NOTE_TITLE, title)
+            intent.putExtra(NOTE_DESCRIPTION, description)
             context?.startActivity(intent)
         }
 
