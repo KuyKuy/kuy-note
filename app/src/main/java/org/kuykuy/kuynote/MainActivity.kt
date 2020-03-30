@@ -30,14 +30,11 @@ class MainActivity : AppCompatActivity() {
         noteListView.adapter = noteAdapter
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
             val intent = Intent(this, NoteDetailsActivity::class.java)
             intent.putExtra(MODE_EXTRA, ADD_MODE)
             startActivity(intent)
+            finish()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return super.onCreateOptionsMenu(menu)
     }
 }
