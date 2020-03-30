@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initialize(){
         listNotes = noteService.findAll()
-        val noteAdapter = NoteAdapter(this, listNotes)
+        val noteAdapter = NoteAdapter(this, this, listNotes)
 
         val noteListView = findViewById<ListView>(R.id.notesLv)
         noteListView.adapter = noteAdapter
